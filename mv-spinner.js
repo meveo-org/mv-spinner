@@ -16,7 +16,7 @@ export class MvSpinner extends LitElement {
       hasError: { type: Boolean, attribute: "has-error", reflect: true },
       disabled: { type: Boolean, attribute: true },
       required: { type: Boolean, attribute: true },
-      immediate: { type: Boolean, attribute: true }
+      immediate: { type: Boolean, attribute: true },
     };
   }
 
@@ -100,33 +100,35 @@ export class MvSpinner extends LitElement {
     `;
   }
 
-  inputChange = event => {
+  inputChange = (event) => {
     const { detail } = event;
     const { name, value, originalEvent } = detail;
     const numberValue = new Number(value);
-    this.hasError = isNaN(numberValue);
-    this.changeValue({ name, value, originalEvent, invalid: this.hasError });
+    const invalid = isNaN(numberValue);
+    this.hasError = invalid || this.hasError;
+    this.changeValue({ name, value, originalEvent, invalid });
   };
 
-  add = step => originalEvent => {
+  add = (step) => (originalEvent) => {
     const mvInput = this.shadowRoot.querySelector("mv-input");
     const { name, value } = mvInput;
     const factor = Math.pow(10, this.precision);
     const numberValue = new Number(value);
     const stepValue = new Number(step);
-    this.hasError = isNaN(numberValue);
-    const newValue = this.hasError
+    const invalid = isNaN(numberValue);
+    this.hasError = invalid || this.hasError;
+    const newValue = invalid
       ? value
       : (numberValue * factor + stepValue * factor) / factor;
     this.changeValue({
       name,
       value: newValue,
       originalEvent,
-      invalid: this.hasError
+      invalid: this.hasError,
     });
   };
 
-  changeValue = detail => {
+  changeValue = (detail) => {
     if (detail.value !== Number.NaN) {
       this.value = detail.value;
     }

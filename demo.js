@@ -6,7 +6,8 @@ export class MvInputDemo extends LitElement {
   static get properties() {
     return {
       detail: { type: Object, attribute: false },
-      theme: { type: String, attribute: true }
+      theme: { type: String, attribute: true },
+      hasError: { type: Boolean, attribute: false, reflect: true },
     };
   }
 
@@ -61,6 +62,7 @@ export class MvInputDemo extends LitElement {
   constructor() {
     super();
     this.detail = {};
+    this.hasError = false;
     this.theme = "light";
     this.customValue = 50;
   }
@@ -104,12 +106,12 @@ export class MvInputDemo extends LitElement {
           @spinner-change="${this.changeValue}"
         ></mv-spinner>
 
-        <h2>Has error</h2>
+        <h2>Has error if value < 0</h2>
         <mv-spinner
           name="has error"
           placeholder="Error"
-          has-error
-          @spinner-change="${this.changeValue}"
+          ?has-error="${this.hasError}"
+          @spinner-change="${this.changeError}"
         ></mv-spinner>
 
         <h2>Disabled</h2>
@@ -145,7 +147,6 @@ export class MvInputDemo extends LitElement {
           precision="2"
           @spinner-change="${this.changeCustomValue}"
         ></mv-spinner>
-
       </mv-container>
       <mv-container .theme="${theme}">
         <pre>${JSON.stringify(this.detail, null, 2)}</pre>
@@ -153,18 +154,24 @@ export class MvInputDemo extends LitElement {
     `;
   }
 
-  changeValue = event => {
+  changeValue = (event) => {
     const { detail } = event;
     this.detail = detail;
   };
 
-  changeCustomValue = event => {
+  changeError = (event) => {
+    const { detail } = event;
+    this.detail = detail;
+    this.hasError = detail.invalid || detail.value < 0;
+  };
+
+  changeCustomValue = (event) => {
     const { detail } = event;
     this.detail = detail;
     this.customValue = detail.value;
   };
 
-  changeTheme = originalEvent => {
+  changeTheme = (originalEvent) => {
     this.theme = originalEvent.target.value;
   };
 }
