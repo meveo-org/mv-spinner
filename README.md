@@ -24,6 +24,8 @@ To experiment with the MvSpinner component.
   precision="1"                           // indicate the precision when the step is a decimal value
                                           // between 0 and 1, otherwise, the increment/decrement value
                                           // will not be precise
+  min="1"                                 // set the minimum value for the spinner
+  max="10"                                // set the maximum value for the spinner
   placeholder="Enter text here"           // placeholder shown on spinner when no value is entered yet
   rounded                                 // the spinner is rendered with rounded ends
   has-error                               // the spinner is rendered with error borders

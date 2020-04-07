@@ -7,6 +7,8 @@ export class MvSpinner extends LitElement {
       name: { type: String, attribute: true },
       value: { type: String, attribute: true },
       step: { type: Number, attribute: true },
+      min: { type: Number, attribute: true },
+      max: { type: Number, attribute: true },
       // when using fractional step between 0 and 1
       // specify a precision of how many decimal places to round off to
       precision: { type: Number, attribute: true },
@@ -63,7 +65,9 @@ export class MvSpinner extends LitElement {
     this.required = false;
     this.step = 1;
     this.precision = 0;
-    this.value = 0;
+    this.value = "";
+    this.min = undefined;
+    this.max = undefined;
   }
 
   render() {
@@ -129,10 +133,20 @@ export class MvSpinner extends LitElement {
   };
 
   changeValue = (detail) => {
-    if (detail.value !== Number.NaN) {
-      this.value = detail.value;
+    const withinMinimum = this.min === undefined || detail.value >= this.min;
+    const withinMaximum = this.max === undefined || detail.value <= this.max;
+    if (withinMinimum && withinMaximum) {
+      if (detail.value !== Number.NaN) {
+        this.value = detail.value;
+      }
+      this.dispatchEvent(new CustomEvent("spinner-change", { detail }));
+    } else {
+      const oldValue = this.value;
+      this.value = 0;
+      setTimeout(() => {
+        this.value = oldValue;
+      }, 0);
     }
-    this.dispatchEvent(new CustomEvent("spinner-change", { detail }));
   };
 }
 

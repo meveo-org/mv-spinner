@@ -147,6 +147,15 @@ export class MvInputDemo extends LitElement {
           precision="2"
           @spinner-change="${this.changeCustomValue}"
         ></mv-spinner>
+
+        <h2>min=0, max = 5</h2>
+        <mv-spinner
+          name="min-max"
+          placeholder="mininum: 0, maximum: 5"
+          @spinner-change="${this.changeValue}"
+          min="0"
+          max="5"
+        ></mv-spinner>
       </mv-container>
       <mv-container .theme="${theme}">
         <pre>${JSON.stringify(this.detail, null, 2)}</pre>
