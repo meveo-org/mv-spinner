@@ -5,7 +5,7 @@ export class MvSpinner extends LitElement {
   static get properties() {
     return {
       name: { type: String, attribute: true },
-      value: { type: String, attribute: true },
+      value: { type: Number, attribute: true },
       step: { type: Number, attribute: true },
       min: { type: Number, attribute: true },
       max: { type: Number, attribute: true },
