@@ -133,8 +133,9 @@ export class MvSpinner extends LitElement {
   };
 
   changeValue = (detail) => {
-    const withinMinimum = this.min === undefined || detail.value >= this.min;
-    const withinMaximum = this.max === undefined || detail.value <= this.max;
+    const {min, max} = this;
+    const withinMinimum = Number.isNaN(min) || min === undefined || detail.value >= min;
+    const withinMaximum = Number.isNaN(max) || max === undefined || detail.value <= max;
     if (withinMinimum && withinMaximum) {
       if (detail.value !== Number.NaN) {
         this.value = detail.value;
