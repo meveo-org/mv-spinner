@@ -1,0 +1,25 @@
+{
+  "name": "@meveo-org/mv-spinner",
+  "version": "1.0.0",
+  "description": "MvSpinner is a spinner component based on lit-element.",
+  "main": "mv-spinner.js",
+  "scripts": {
+    "serve": "es-dev-server --node-resolve --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meveo-org/mv-spinner.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meveo-org/mv-spinner/issues"
+  },
+  "homepage": "https://github.com/meveo-org/mv-spinner#readme",
+  "dependencies": {
+    "@meveo-org/mv-input": "^1.0.0"
+  },
+  "devDependencies": {
+    "es-dev-server": "^1.46.1"
+  }
+}

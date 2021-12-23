@@ -1,5 +1,5 @@
 import { LitElement, html, css } from "lit-element";
-import "mv-input";
+import "@meveo-org/mv-input";
 
 export class MvSpinner extends LitElement {
   static get properties() {
