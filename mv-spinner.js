@@ -1,4 +1,4 @@
-import { LitElement, html, css } from "lit-element";
+import { LitElement, html, css } from "lit";
 import "@meveo-org/mv-input";
 
 export class MvSpinner extends LitElement {
